@@ -1,0 +1,48 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/style.css')}}">
+{% endblock %}
+
+{% block title %}Image Color Palette Generator{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <h1>Image Color Palette Generator</h1>
+  {{ wtf.quick_form(form, novalidate=True) }}
+</div>
+
+{% if colors: %}
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th>Color</th>
+        <th>Color Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for col in colors: %}
+      <tr>
+        <td style="background: {{col}}"></td>
+        <td>{{ col }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{% if img: %}
+<div class="container">
+  <img src="{{img}}">
+</div>
+{% endif %}
+
+{% endblock %}
+
